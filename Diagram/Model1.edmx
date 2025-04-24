@@ -13,14 +13,500 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Persons" EntityType="Model1.Person" />
+          <EntitySet Name="FormSet" EntityType="Model1.Form" />
+          <EntitySet Name="ModuleSet" EntityType="Model1.Module" />
+          <EntitySet Name="RolFormSet" EntityType="Model1.RolForm" />
+          <EntitySet Name="RolSet" EntityType="Model1.Rol" />
+          <EntitySet Name="UserSet" EntityType="Model1.User" />
+          <EntitySet Name="PersonSet" EntityType="Model1.Person" />
+          <EntitySet Name="SedeSet" EntityType="Model1.Sede" />
+          <EntitySet Name="CompanySet" EntityType="Model1.Company" />
+          <EntitySet Name="Items" EntityType="Model1.Product" />
+          <EntitySet Name="ImageItemSet" EntityType="Model1.ImageItem" />
+          <EntitySet Name="Inventorys" EntityType="Model1.Inventory" />
+          <EntitySet Name="CategorySet" EntityType="Model1.Category" />
+          <EntitySet Name="MovimientoInventorySet" EntityType="Model1.MovimientoInventory" />
+          <EntitySet Name="Buyouts" EntityType="Model1.Buyout" />
+          <EntitySet Name="Sales" EntityType="Model1.Sale" />
+          <EntitySet Name="SaleDetailSet" EntityType="Model1.SaleDetail" />
+          <EntitySet Name="Notifications" EntityType="Model1.Notification" />
+          <AssociationSet Name="FormRolForm" Association="Model1.FormRolForm">
+            <End Role="Form" EntitySet="FormSet" />
+            <End Role="RolForm" EntitySet="RolFormSet" />
+          </AssociationSet>
+          <AssociationSet Name="ModuleForm" Association="Model1.ModuleForm">
+            <End Role="Module" EntitySet="ModuleSet" />
+            <End Role="Form" EntitySet="FormSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserRol" Association="Model1.UserRol">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Rol" EntitySet="RolSet" />
+          </AssociationSet>
+          <AssociationSet Name="RolRolForm" Association="Model1.RolRolForm">
+            <End Role="Rol" EntitySet="RolSet" />
+            <End Role="RolForm" EntitySet="RolFormSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserPerson" Association="Model1.UserPerson">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Person" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanySede" Association="Model1.CompanySede">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Sede" EntitySet="SedeSet" />
+          </AssociationSet>
+          <AssociationSet Name="ItemImageItem" Association="Model1.ItemImageItem">
+            <End Role="Product" EntitySet="Items" />
+            <End Role="ImageItem" EntitySet="ImageItemSet" />
+          </AssociationSet>
+          <AssociationSet Name="ItemCategory" Association="Model1.ItemCategory">
+            <End Role="Product" EntitySet="Items" />
+            <End Role="Category" EntitySet="CategorySet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductBuyout" Association="Model1.ProductBuyout">
+            <End Role="Product" EntitySet="Items" />
+            <End Role="Buyout" EntitySet="Buyouts" />
+          </AssociationSet>
+          <AssociationSet Name="ProductMovimientoInventory" Association="Model1.ProductMovimientoInventory">
+            <End Role="Product" EntitySet="Items" />
+            <End Role="MovimientoInventory" EntitySet="MovimientoInventorySet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductInventory" Association="Model1.ProductInventory">
+            <End Role="Product" EntitySet="Items" />
+            <End Role="Inventory" EntitySet="Inventorys" />
+          </AssociationSet>
+          <AssociationSet Name="ProductSaleDetail" Association="Model1.ProductSaleDetail">
+            <End Role="Product" EntitySet="Items" />
+            <End Role="SaleDetail" EntitySet="SaleDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="InventoryMovimientoItemInventory" Association="Model1.InventoryMovimientoItemInventory">
+            <End Role="Inventory" EntitySet="Inventorys" />
+            <End Role="MovimientoInventory" EntitySet="MovimientoInventorySet" />
+          </AssociationSet>
+          <AssociationSet Name="UserBuyout" Association="Model1.UserBuyout">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Buyout" EntitySet="Buyouts" />
+          </AssociationSet>
+          <AssociationSet Name="UserSale" Association="Model1.UserSale">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="SaleSaleDetail" Association="Model1.SaleSaleDetail">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SaleDetail" EntitySet="SaleDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserNotification" Association="Model1.UserNotification">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameForm" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="IdModule" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RolForm" Relationship="Model1.FormRolForm" FromRole="Form" ToRole="RolForm" />
+          <NavigationProperty Name="Module" Relationship="Model1.ModuleForm" FromRole="Form" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameModule" Type="String" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="Model1.ModuleForm" FromRole="Module" ToRole="Form" />
+        </EntityType>
+        <EntityType Name="RolForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Permision" Type="Int32" Nullable="false" />
+          <Property Name="IdForm" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="Model1.FormRolForm" FromRole="RolForm" ToRole="Form" />
+          <NavigationProperty Name="Rol" Relationship="Model1.RolRolForm" FromRole="RolForm" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRol" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.UserRol" FromRole="Rol" ToRole="User" />
+          <NavigationProperty Name="RolForm" Relationship="Model1.RolRolForm" FromRole="Rol" ToRole="RolForm" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <Property Name="DeleteAt" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="UpdateAt" Type="String" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="Model1.UserRol" FromRole="User" ToRole="Rol" />
+          <NavigationProperty Name="Person" Relationship="Model1.UserPerson" FromRole="User" ToRole="Person" />
+          <NavigationProperty Name="Buyout" Relationship="Model1.UserBuyout" FromRole="User" ToRole="Buyout" />
+          <NavigationProperty Name="Sale" Relationship="Model1.UserSale" FromRole="User" ToRole="Sale" />
+          <NavigationProperty Name="Notification" Relationship="Model1.UserNotification" FromRole="User" ToRole="Notification" />
+        </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" />
+          <Property Name="last_name" Type="String" Nullable="false" />
+          <Property Name="phone_number" Type="Int16" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="type_identification" Type="String" Nullable="false" />
+          <Property Name="number_identification" Type="Int16" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.UserPerson" FromRole="Person" ToRole="User" />
         </EntityType>
+        <EntityType Name="Sede">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameSede" Type="String" Nullable="false" />
+          <Property Name="CodeSede" Type="Int64" Nullable="false" />
+          <Property Name="AddressSede" Type="String" Nullable="false" />
+          <Property Name="PhoneSede" Type="Int16" Nullable="false" />
+          <Property Name="EmailSede" Type="String" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" />
+          <Property Name="DeleteAt" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateAt" Type="DateTime" Nullable="false" />
+          <Property Name="IdCompany" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Model1.CompanySede" FromRole="Sede" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" />
+          <Property Name="DeleteAt" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateAt" Type="DateTime" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="NameCompany" Type="String" Nullable="false" />
+          <Property Name="PhoneCompany" Type="Int16" Nullable="false" />
+          <Property Name="EmailCompany" Type="String" Nullable="false" />
+          <Property Name="NitCompany" Type="Int16" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Logo" Type="String" Nullable="false" />
+          <NavigationProperty Name="Sede" Relationship="Model1.CompanySede" FromRole="Company" ToRole="Sede" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProduct" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <Property Name="DeleteAt" Type="String" Nullable="false" />
+          <Property Name="UpdateAt" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="IdInventory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ImageItem" Relationship="Model1.ItemImageItem" FromRole="Product" ToRole="ImageItem" />
+          <NavigationProperty Name="Category" Relationship="Model1.ItemCategory" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Buyout" Relationship="Model1.ProductBuyout" FromRole="Product" ToRole="Buyout" />
+          <NavigationProperty Name="MovimientoInventory" Relationship="Model1.ProductMovimientoInventory" FromRole="Product" ToRole="MovimientoInventory" />
+          <NavigationProperty Name="Inventory" Relationship="Model1.ProductInventory" FromRole="Product" ToRole="Inventory" />
+          <NavigationProperty Name="SaleDetail" Relationship="Model1.ProductSaleDetail" FromRole="Product" ToRole="SaleDetail" />
+        </EntityType>
+        <EntityType Name="ImageItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrlImage" Type="String" Nullable="false" />
+          <Property Name="IdProduct" Type="String" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Model1.ItemImageItem" FromRole="ImageItem" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameInventory" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="Observation" Type="String" Nullable="false" />
+          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <Property Name="DeleteAt" Type="String" Nullable="false" />
+          <Property Name="UpdateAt" Type="String" Nullable="false" />
+          <Property Name="StockActual" Type="String" Nullable="false" />
+          <Property Name="ZoneProduct" Type="String" Nullable="false" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Model1.ProductInventory" FromRole="Inventory" ToRole="Product" />
+          <NavigationProperty Name="MovimientoItemInventory" Relationship="Model1.InventoryMovimientoItemInventory" FromRole="Inventory" ToRole="MovimientoInventory" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="IdProduct" Type="String" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Model1.ItemCategory" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="MovimientoInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeMoviment" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="Int32" Nullable="false" />
+          <Property Name="IdInventory" Type="String" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Model1.ProductMovimientoInventory" FromRole="MovimientoInventory" ToRole="Product" />
+          <NavigationProperty Name="Inventory" Relationship="Model1.InventoryMovimientoItemInventory" FromRole="MovimientoInventory" ToRole="Inventory" />
+        </EntityType>
+        <EntityType Name="Buyout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="String" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Model1.ProductBuyout" FromRole="Buyout" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Model1.UserBuyout" FromRole="Buyout" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="String" Nullable="false" />
+          <Property Name="totaly" Type="String" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.UserSale" FromRole="Sale" ToRole="User" />
+          <NavigationProperty Name="SaleDetail" Relationship="Model1.SaleSaleDetail" FromRole="Sale" ToRole="SaleDetail" />
+        </EntityType>
+        <EntityType Name="SaleDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="String" Nullable="false" />
+          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="IdSale" Type="Int32" Nullable="false" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Model1.ProductSaleDetail" FromRole="SaleDetail" ToRole="Product" />
+          <NavigationProperty Name="Sale" Relationship="Model1.SaleSaleDetail" FromRole="SaleDetail" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeAction" Type="String" Nullable="false" />
+          <Property Name="IdReferece" Type="String" Nullable="false" />
+          <Property Name="Mensage" Type="String" Nullable="false" />
+          <Property Name="Read" Type="String" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.UserNotification" FromRole="Notification" ToRole="User" />
+        </EntityType>
+        <Association Name="FormRolForm">
+          <End Type="Model1.Form" Role="Form" Multiplicity="1" />
+          <End Type="Model1.RolForm" Role="RolForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolForm">
+              <PropertyRef Name="IdForm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ModuleForm">
+          <End Type="Model1.Module" Role="Module" Multiplicity="1" />
+          <End Type="Model1.Form" Role="Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Form">
+              <PropertyRef Name="IdModule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserRol">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Rol" Role="Rol" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rol">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RolRolForm">
+          <End Type="Model1.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="Model1.RolForm" Role="RolForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolForm">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPerson">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Person" Role="Person" Multiplicity="1" />
+        </Association>
+        <Association Name="CompanySede">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.Sede" Role="Sede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sede">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemImageItem">
+          <End Type="Model1.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model1.ImageItem" Role="ImageItem" Multiplicity="1" />
+        </Association>
+        <Association Name="ItemCategory">
+          <End Type="Model1.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model1.Category" Role="Category" Multiplicity="1" />
+        </Association>
+        <Association Name="ProductBuyout">
+          <End Type="Model1.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model1.Buyout" Role="Buyout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buyout">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductMovimientoInventory">
+          <End Type="Model1.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model1.MovimientoInventory" Role="MovimientoInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovimientoInventory">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductInventory">
+          <End Type="Model1.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model1.Inventory" Role="Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductSaleDetail">
+          <End Type="Model1.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model1.SaleDetail" Role="SaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleDetail">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InventoryMovimientoItemInventory">
+          <End Type="Model1.Inventory" Role="Inventory" Multiplicity="1" />
+          <End Type="Model1.MovimientoInventory" Role="MovimientoInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovimientoInventory">
+              <PropertyRef Name="TypeMoviment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserBuyout">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Buyout" Role="Buyout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buyout">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSale">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SaleSaleDetail">
+          <End Type="Model1.Sale" Role="Sale" Multiplicity="1" />
+          <End Type="Model1.SaleDetail" Role="SaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleDetail">
+              <PropertyRef Name="IdSale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserNotification">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
