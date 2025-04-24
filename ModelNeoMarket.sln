@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagram", "Diagram\Diagram.csproj", "{AEE89176-F366-4488-BA1E-C12F06C4DAF4}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{4642A76A-9125-4DC0-846C-1B3DF57268A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{084295E4-EF1C-48CC-81BD-46B40CAAC52E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{DFBE1069-F9F2-481A-85D3-208F7638D4FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{4642A76A-9125-4DC0-846C-1B3DF57268A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4642A76A-9125-4DC0-846C-1B3DF57268A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4642A76A-9125-4DC0-846C-1B3DF57268A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{084295E4-EF1C-48CC-81BD-46B40CAAC52E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{084295E4-EF1C-48CC-81BD-46B40CAAC52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{084295E4-EF1C-48CC-81BD-46B40CAAC52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{084295E4-EF1C-48CC-81BD-46B40CAAC52E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFBE1069-F9F2-481A-85D3-208F7638D4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBE1069-F9F2-481A-85D3-208F7638D4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBE1069-F9F2-481A-85D3-208F7638D4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBE1069-F9F2-481A-85D3-208F7638D4FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
