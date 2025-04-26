@@ -119,6 +119,37 @@ public class FormBusiness
         }
     }
 
+    // Método para actualizar una compra existente
+
+    public async Task<bool> UpdateFormAsync(FormDto formDto)
+    {
+        try
+        {
+            // Validamos los datos recibidos del formulario
+            ValidateForm(formDto);
+
+            // Mapeamos el DTO a la entidad correspondiente
+            var formEntity = MapToEntity(formDto);
+
+            // Realizamos la actualización del formulario en la base de datos
+            var result = await _formData.UpdateAsync(formEntity);
+
+            // Verificamos si la actualización fue exitosa
+            if (!result)
+            {
+                _logger.LogWarning("No se pudo actualizar el formulario con ID {FormId}", formDto.Id);
+                throw new EntityNotFoundException("Formulario", formDto.Id);
+            }
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al actualizar el formulario con ID {FormId}", formDto.Id);
+            throw new ExternalServiceException("Base de datos", $"Error al actualizar el formulario con ID {formDto.Id}", ex);
+        }
+    }
+
     // Método para eliminar lógicamente un formulario (SoftDelete)
     public async Task<bool> SoftDeleteAsync(int id)
     {
@@ -170,7 +201,8 @@ public class FormBusiness
             Id = form.Id,
             Description = form.Description,
             Status = form.Status,
-            NameForm = form.NameForm
+            NameForm = form.NameForm,
+            IdModule = form.IdModule
         };
     }
 
@@ -182,7 +214,8 @@ public class FormBusiness
             Id = formDto.Id,
             NameForm = formDto.NameForm,
             Description = formDto.Description,
-            Status = formDto.Status
+            Status = formDto.Status,
+            IdModule = formDto.IdModule
         };
     }
 
@@ -197,7 +230,7 @@ public class FormBusiness
         return formDto;
     }
 
-    public async Task UpdateFormAsync(FormDto formDto)
+    public async Task UpdateAsync(FormDto formDto)
     {
         throw new NotImplementedException();
     }

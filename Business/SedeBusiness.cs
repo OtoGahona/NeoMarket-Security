@@ -271,7 +271,8 @@ public class SedeBusiness
             CodeSede = sede.CodeSede,
             AddressSede = sede.AddressSede,
             EmailSede = sede.EmailSede,
-            Status = sede.Status
+            Status = sede.Status,
+            IdCompany = sede.IdCompany
         };
     }
 
@@ -285,7 +286,8 @@ public class SedeBusiness
             CodeSede = sedeDto.CodeSede,
             AddressSede = sedeDto.AddressSede,
             EmailSede = sedeDto.EmailSede,
-            Status = sedeDto.Status
+            Status = sedeDto.Status,
+            IdCompany =sedeDto.IdCompany
         };
     }
 

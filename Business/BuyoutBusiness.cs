@@ -67,7 +67,8 @@ public class BuyoutBusiness
     {
         try
         {
-            ValidateBuyout(buyoutDto);
+            
+          ValidateBuyout(buyoutDto);
 
             var buyout = MapToEntity(buyoutDto);
 
@@ -80,8 +81,6 @@ public class BuyoutBusiness
             throw new ExternalServiceException("Base de datos", "Error al crear la compra", ex);
         }
     }
-
-    // ... (todo lo anterior se mantiene igual)
 
     // Método para actualizar una compra existente
     public async Task<bool> UpdateBuyoutAsync(BuyoutDto buyoutDto)
@@ -242,7 +241,9 @@ public class BuyoutBusiness
         {
             Id = buyout.Id,
             Quantity = buyout.Quantity,
-            Date = buyout.Date
+            Date = buyout.Date,
+            IdUser = buyout.IdUser,
+            IdProduct = buyout.IdProduct
         };
     }
 
@@ -253,7 +254,9 @@ public class BuyoutBusiness
         {
             Id = buyoutDto.Id,
             Quantity = buyoutDto.Quantity,
-            Date = buyoutDto.Date
+            Date = buyoutDto.Date,
+            IdUser = buyoutDto.IdUser,
+            IdProduct = buyoutDto.IdProduct 
         };
     }
 

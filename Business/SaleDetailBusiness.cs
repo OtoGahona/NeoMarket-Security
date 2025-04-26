@@ -257,7 +257,9 @@ public class SaleDetailBusiness
         {
             Id = seleDetail.Id,
             Quantity = seleDetail.Quantity,
-            Price = seleDetail.Price
+            Price = seleDetail.Price,
+            IdProduct = seleDetail.IdProduct,
+            IdSele = seleDetail.IdSele
         };
     }
 
@@ -268,7 +270,9 @@ public class SaleDetailBusiness
         {
             Id = seleDetailDto.Id,
             Quantity = seleDetailDto.Quantity,
-            Price = seleDetailDto.Price
+            Price = seleDetailDto.Price,
+            IdProduct = seleDetailDto.IdProduct,
+            IdSele = seleDetailDto.IdSele
         };
     }
 

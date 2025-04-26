@@ -4,6 +4,7 @@ using Entity.Model;
 using Microsoft.Extensions.Logging;
 using Utilities.Exceptions;
 
+
 namespace Business;
 
 /// <summary>
@@ -253,7 +254,7 @@ public class PersonBusiness
             Email = person.Email,
             Status = person.Status,
             TypeIdentification = person.TypeIdentification,
-            NumberIndification = person.NumberIndification
+            NumberIdentification = person.NumberIdentification
         };
     }
 
@@ -269,7 +270,7 @@ public class PersonBusiness
             Email = personDto.Email,
             Status = personDto.Status,
             TypeIdentification = personDto.TypeIdentification,
-            NumberIndification = personDto.NumberIndification
+            NumberIdentification = personDto.NumberIdentification
         };
     }
 

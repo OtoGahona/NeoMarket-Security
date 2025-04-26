@@ -77,7 +77,7 @@ public class MovimientInventoryBusiness
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al crear nuevo movimiento de inventario: {MovimientInventoryName}", movimientInventoryDto?.Quantity ?? "null");
+            _logger.LogError(ex, "Error al crear nuevo movimiento de inventario: {MovimientInventoryName}", movimientInventoryDto?.Quantity);
             throw new ExternalServiceException("Base de datos", "Error al crear el movimiento de inventario", ex);
         }
     }
@@ -124,7 +124,7 @@ public class MovimientInventoryBusiness
                 throw new EntityNotFoundException("MovimientInventory", id);
             }
 
-            if (!string.IsNullOrWhiteSpace(updatedFields.Quantity))
+            if (int.IsNegative(updatedFields.Quantity))
             {
                 existingMovimientInventory.Quantity = updatedFields.Quantity;
             }
@@ -171,7 +171,7 @@ public class MovimientInventoryBusiness
                 throw new EntityNotFoundException("MovimientInventory", id);
             }
 
-            movimientInventory.Quantity = "0"; // Ejemplo: marcar como eliminado lógicamente
+            movimientInventory.Quantity = 0; // Ejemplo: marcar como eliminado lógicamente
 
             var result = await _movimientInventoryData.UpdateAsync(movimientInventory);
 
@@ -226,7 +226,7 @@ public class MovimientInventoryBusiness
             throw new Utilities.Exceptions.ValidationException("El objeto movimiento de inventario no puede ser nulo");
         }
 
-        if (string.IsNullOrWhiteSpace(movimientInventoryDto.Quantity))
+        if (movimientInventoryDto.Quantity <= 0)
         {
             _logger.LogWarning("Se intentó crear/actualizar un movimiento de inventario con Name vacío");
             throw new Utilities.Exceptions.ValidationException("Name", "El Name del movimiento de inventario es obligatorio");
@@ -242,7 +242,9 @@ public class MovimientInventoryBusiness
             Quantity = movimientInventory.Quantity,
             Description = movimientInventory.Description,
             Date = movimientInventory.Date,
-            TypeMoviment = movimientInventory.TypeMovement
+            TypeMoviment = movimientInventory.TypeMovement,
+            IdInventory = movimientInventory.IdInventory,
+            IdProduct = movimientInventory.IdProduct
         };
     }
 
@@ -255,7 +257,9 @@ public class MovimientInventoryBusiness
             Quantity = movimientInventoryDto.Quantity,
             Description = movimientInventoryDto.Description,
             Date = movimientInventoryDto.Date,
-            TypeMovement = movimientInventoryDto.TypeMoviment
+            TypeMovement = movimientInventoryDto.TypeMoviment,
+            IdInventory = movimientInventoryDto.IdInventory,
+            IdProduct = movimientInventoryDto.IdProduct
         };
     }
 

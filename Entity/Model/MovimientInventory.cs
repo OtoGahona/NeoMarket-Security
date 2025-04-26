@@ -10,7 +10,7 @@ namespace Entity.Model
     public class MovimientInventory
     {
         public int Id { get; set; }
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public TypeMovement TypeMovement { get; set; }

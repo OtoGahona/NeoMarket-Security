@@ -11,10 +11,10 @@ namespace Entity.DTOs
         public int Id { get; set; }
         public string Description { get; set; } = string.Empty;
         public string NameCompany { get; set; } = string.Empty;
-        public int PhoneCompany { get; set; } 
+        public string PhoneCompany { get; set; } 
         public string Logo { get; set; } = string.Empty;
         public string EmailCompany { get; set; } = string.Empty;
-        public string NitCompany { get; set; } = string.Empty;
+        public short NitCompany { get; set; } 
         public bool Status { get; set; }
     }
 }

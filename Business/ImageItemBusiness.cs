@@ -270,8 +270,4 @@ public class ImageItemBusiness
         return imageItemDtos;
     }
 
-    public async Task UpdateImageItemAsync(ImageItemDTO imageItemDto)
-    {
-        throw new NotImplementedException();
-    }
 }

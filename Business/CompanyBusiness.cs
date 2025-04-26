@@ -132,8 +132,9 @@ public class CompanyBusiness
             if (!string.IsNullOrWhiteSpace(updatedFields.Description))
                 existingCompany.Description = updatedFields.Description;
 
-            if (updatedFields.PhoneCompany != 0)
+            if (!string.IsNullOrWhiteSpace(updatedFields.PhoneCompany))
                 existingCompany.PhoneCompany = updatedFields.PhoneCompany;
+
 
             if (!string.IsNullOrWhiteSpace(updatedFields.EmailCompany))
                 existingCompany.EmailCompany = updatedFields.EmailCompany;
@@ -141,7 +142,7 @@ public class CompanyBusiness
             if (!string.IsNullOrWhiteSpace(updatedFields.Logo))
                 existingCompany.Logo = updatedFields.Logo;
 
-            if (!string.IsNullOrWhiteSpace(updatedFields.NitCompany))
+            if (updatedFields.NitCompany != 0)
                 existingCompany.NitCompany = updatedFields.NitCompany;
 
             if (updatedFields.Status != existingCompany.Status)

@@ -169,48 +169,49 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Actualiza una imagen de item existente en el sistema
+        /// Actualiza un ImageItem existente en el sistema
         /// </summary>
-        /// <param name="id">ID de la imagen del item a actualizar</param>
-        /// <param name="imageItemDto">Datos actualizados de la imagen del item</param>
+        /// <param name="id">ID del ImageItem a actualizar</param>
+        /// <param name="imageItemDto">Datos actualizados del ImageItem</param>
         /// <returns>Resultado de la operación</returns>
-        /// <response code="200">Imagen de item actualizada correctamente</response>
-        /// <response code="400">Datos de la imagen del item no válidos</response>
-        /// <response code="404">Imagen del item no encontrada</response>
+        /// <response code="200">ImageItem actualizado correctamente</response>
+        /// <response code="400">Datos no válidos</response>
+        /// <response code="404">ImageItem no encontrado</response>
         /// <response code="500">Error interno del servidor</response>
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> UpdateImageItem(int id, [FromBody] ImageItemDTO imageItemDto)
+        public async Task<IActionResult> UpdateImageItemAsync(int id, [FromBody] ImageItemDTO imageItemDto)
         {
             if (id != imageItemDto.Id)
             {
-                return BadRequest(new { message = "El ID de la imagen del item no coincide con el ID proporcionado en el cuerpo de la solicitud." });
+                return BadRequest(new { message = "El ID proporcionado no coincide con el ID del objeto." });
             }
 
             try
             {
-                await _imageItemBusiness.UpdateImageItemAsync(imageItemDto);
-                return Ok(new { message = "Imagen de item actualizada correctamente", success = true });
+                var result = await _imageItemBusiness.UpdateImageItemAsync(id, imageItemDto);
+                return Ok(new { message = "ImageItem actualizado correctamente", success = result });
             }
             catch (ValidationException ex)
             {
-                _logger.LogWarning(ex, "Validación fallida al actualizar la imagen del item con ID: {ImageItemId}", id);
+                _logger.LogWarning(ex, "Validación fallida al actualizar el ImageItem con ID: {ImageItemId}", id);
                 return BadRequest(new { message = ex.Message });
             }
             catch (EntityNotFoundException ex)
             {
-                _logger.LogInformation(ex, "Imagen del item no encontrada con ID: {ImageItemId}", id);
+                _logger.LogInformation(ex, "ImageItem no encontrado con ID: {ImageItemId}", id);
                 return NotFound(new { message = ex.Message });
             }
             catch (ExternalServiceException ex)
             {
-                _logger.LogError(ex, "Error al actualizar la imagen del item con ID: {ImageItemId}", id);
+                _logger.LogError(ex, "Error al actualizar el ImageItem con ID: {ImageItemId}", id);
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
 
 
         /// <summary>

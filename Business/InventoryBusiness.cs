@@ -142,7 +142,7 @@ public class InventoryBusiness
             }
 
             // Marcar el inventario como eliminado (o inactivo)
-            inventory.Status = false; 
+            inventory.Status = false;
 
             var success = await _inventoryData.UpdateAsync(inventory);
             return success;

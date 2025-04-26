@@ -4,6 +4,7 @@ using Data;
 using Entity.DTO;
 using Entity.Model;
 using Microsoft.Extensions.Logging;
+
 using Utilities.Exceptions;
 
 namespace Business;
@@ -266,6 +267,7 @@ public class RolBusiness
             NameRol = rolDTO.NameRol,
             Description = rolDTO.Description,
             Status = rolDTO.Status,
+            IdUser = rolDTO.IdUser
         };
     }
 

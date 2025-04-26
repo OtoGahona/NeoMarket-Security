@@ -15,7 +15,7 @@ namespace Entity.DTO
         public string PhoneNumber { get; set; }
         public string Email { get; set; } = string.Empty;
         public TypeIdentification? TypeIdentification { get; set; }
-        public int NumberIndification { get; set; }
+        public int NumberIdentification { get; set; }
         public bool Status { get; set; }
     }
 }

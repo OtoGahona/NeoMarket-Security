@@ -13,7 +13,7 @@ namespace Entity.Model
         public DateTime Date { get; set; }
         public int IdProduct { get; set; }
         public Product Product { get; set; }
-        public int UserId { get; set; }
+        public int  IdUser { get; set; }
         public User User { get; set; }
 
 

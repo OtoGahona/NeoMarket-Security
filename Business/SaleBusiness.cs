@@ -259,6 +259,7 @@ public class SaleBusiness
             Id = seleccion.Id,
             Date = seleccion.Date,
             Totaly = seleccion.Totaly,
+            IdUser =seleccion.IdUser
 
         };
     }
@@ -270,7 +271,8 @@ public class SaleBusiness
         {
             Id = seleDto.Id,
             Date = seleDto.Date,
-            Totaly = seleDto.Totaly
+            Totaly = seleDto.Totaly,
+            IdUser = seleDto.IdUser
         };
     }
 

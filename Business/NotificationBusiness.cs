@@ -241,7 +241,8 @@ public class NotificationBusiness
             Message = notification.Message,
             TypeAction = notification.TypeAction,
             Read = notification.Read,
-            Date = notification.Date
+            Date = notification.Date,
+            IdUser = notification.IdUser
         };
     }
 
@@ -254,7 +255,8 @@ public class NotificationBusiness
             Message = notificationDto.Message,
             TypeAction = notificationDto.TypeAction,
             Read = notificationDto.Read,
-            Date = notificationDto.Date
+            Date = notificationDto.Date,
+            IdUser = notificationDto.IdUser
         };
     }
 

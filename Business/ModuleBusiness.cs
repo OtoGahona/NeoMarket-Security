@@ -167,7 +167,7 @@ public class ModuleBusiness
                 throw new EntityNotFoundException("Module", id);
             }
 
-            module.status = false;
+            module.status = true;
 
             var result = await _moduleData.UpdateAsync(module);
 

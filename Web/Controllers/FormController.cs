@@ -137,8 +137,9 @@ namespace Web.Controllers
 
             try
             {
-                await _formBusiness.UpdateFormAsync(formDto);
-                return Ok(new { message = "Rol actualizado correctamente", success = true });
+object value = await _formBusiness.UpdateFormAsync(formDto);
+return Ok(new { message = "Rol actualizado correctamente", success = true });
+
             }
             catch (ValidationException ex)
             {

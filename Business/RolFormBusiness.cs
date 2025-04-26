@@ -252,7 +252,9 @@ public class RolFormBusiness
         return new RolFormDto
         {
             Id = rolForm.Id,
-            Permision = rolForm.Permision
+            Permision = rolForm.Permision,
+            IdForm = rolForm.IdForm,
+            IdRol = rolForm.IdRol
         };
     }
 
@@ -262,7 +264,9 @@ public class RolFormBusiness
         return new RolForm
         {
             Id = rolFormDTO.Id,
-            Permision = rolFormDTO.Permision
+            Permision = rolFormDTO.Permision,
+            IdRol = rolFormDTO.IdRol,
+            IdForm =rolFormDTO.IdForm
         };
     }
 
