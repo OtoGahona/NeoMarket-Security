@@ -10,9 +10,9 @@ namespace Entity.DTO
     public class MovimientInventoryDto
     {
         public int Id { get; set; }
-        public TypeMovement TypeMoviment { get; set; }
-        public int Quantity { get; set; }
-        public DateTime Date { get; set; }
+        public TypeMovement TypeMovement{ get; set; }
+        public string Quantity { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
         public string Description { get; set; }
         public int IdInventory { get; set; }
         public int IdProduct { get; set; }

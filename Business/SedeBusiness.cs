@@ -12,9 +12,9 @@ namespace Business;
 public class SedeBusiness
 {
     private readonly SedeData _sedeData;
-    private readonly ILogger <SedeBusiness> _logger;
+    private readonly ILogger<SedeBusiness> _logger;
 
-    public SedeBusiness(SedeData sedeData, ILogger <SedeBusiness> logger)
+    public SedeBusiness(SedeData sedeData, ILogger<SedeBusiness> logger)
     {
         _sedeData = sedeData;
         _logger = logger;
@@ -271,8 +271,7 @@ public class SedeBusiness
             CodeSede = sede.CodeSede,
             AddressSede = sede.AddressSede,
             EmailSede = sede.EmailSede,
-            Status = sede.Status,
-            IdCompany = sede.IdCompany
+            Status = sede.Status
         };
     }
 
@@ -286,8 +285,7 @@ public class SedeBusiness
             CodeSede = sedeDto.CodeSede,
             AddressSede = sedeDto.AddressSede,
             EmailSede = sedeDto.EmailSede,
-            Status = sedeDto.Status,
-            IdCompany =sedeDto.IdCompany
+            Status = sedeDto.Status
         };
     }
 

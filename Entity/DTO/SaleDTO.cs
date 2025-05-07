@@ -11,7 +11,5 @@ namespace Entity.DTO
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public  int Totaly { get; set; }
-        
-        public int IdUser { get; set; }
     }
 }

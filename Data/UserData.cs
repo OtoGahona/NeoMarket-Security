@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entity.Context;
+using Entity.DTO;
 using Entity.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -31,9 +32,27 @@ namespace Data
         /// Obtiene todos los Users almacenados en la base de datos.
         /// </summary>
         /// <returns>Lista de Users.</returns>
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<UserDto>> GetAllAsync()
         {
-            return await _context.Set<User>().ToListAsync();
+            return await _context.User
+                    .Include(u => u.Rol)
+                    .Include(u => u.Person)
+                    .Include(u => u.Company)
+                    .Select(u => new UserDto
+                    {
+                        Id = u.Id,
+                        UserName = u.UserName,
+                        Password = u.Password,
+                        CreateAt = u.CreateAt,
+                        UpdateAt = u.UpdateAt,
+                        DeleteAt = u.DeleteAt,
+                        Status = u.Status,
+                        //NamePerson = u.Person.FirstName, // Aquí jalas el dato que quieres
+                        //NameRol = u.Rol.NameRol,
+                        //NameCompany = u.Company.NameCompany
+                    })
+                    .ToListAsync();
+
         }
 
         /// <summary>
@@ -117,6 +136,11 @@ namespace Data
                 return false;
             }
         }
+
+        public async Task<User?> GetByUserNameAsync(string userName)
+        {
+            return await _context.User.FirstOrDefaultAsync(u => u.UserName == userName);
+        }
+
     }
 }
-

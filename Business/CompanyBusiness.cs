@@ -14,7 +14,7 @@ namespace Business;
 public class CompanyBusiness
 {
     private readonly CompanyData _companyData;
-    private readonly ILogger <CompanyBusiness> _logger;
+    private readonly ILogger<CompanyBusiness> _logger;
 
     public CompanyBusiness(CompanyData companyData, ILogger<CompanyBusiness> logger)
     {
@@ -135,14 +135,13 @@ public class CompanyBusiness
             if (!string.IsNullOrWhiteSpace(updatedFields.PhoneCompany))
                 existingCompany.PhoneCompany = updatedFields.PhoneCompany;
 
-
             if (!string.IsNullOrWhiteSpace(updatedFields.EmailCompany))
                 existingCompany.EmailCompany = updatedFields.EmailCompany;
 
             if (!string.IsNullOrWhiteSpace(updatedFields.Logo))
                 existingCompany.Logo = updatedFields.Logo;
 
-            if (updatedFields.NitCompany != 0)
+            if (updatedFields.NitCompany < 0)
                 existingCompany.NitCompany = updatedFields.NitCompany;
 
             if (updatedFields.Status != existingCompany.Status)
@@ -252,6 +251,9 @@ public class CompanyBusiness
         return new CompanyDto
         {
             Id = company.Id,
+            CreateAt = company.CreateAt,
+            UpdateAt = company.UpdateAt,
+            DeleteAt = company.DeleteAt,
             NameCompany = company.NameCompany,
             Description = company.Description,
             Status = company.Status,
@@ -268,6 +270,9 @@ public class CompanyBusiness
         return new Company
         {
             Id = companyDto.Id,
+            CreateAt = companyDto.CreateAt,
+            UpdateAt = companyDto.UpdateAt,
+            DeleteAt = companyDto.DeleteAt,
             NameCompany = companyDto.NameCompany,
             Description = companyDto.Description,
             Status = companyDto.Status,
@@ -289,4 +294,3 @@ public class CompanyBusiness
         return companiesDTO;
     }
 }
-

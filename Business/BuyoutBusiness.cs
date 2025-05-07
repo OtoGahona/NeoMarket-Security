@@ -12,9 +12,9 @@ namespace Business;
 public class BuyoutBusiness
 {
     private readonly BuyoutData _buyoutData;
-    private readonly ILogger <BuyoutBusiness> _logger;
+    private readonly ILogger<BuyoutBusiness> _logger;
 
-    public BuyoutBusiness(BuyoutData buyoutData, ILogger <BuyoutBusiness> logger)
+    public BuyoutBusiness(BuyoutData buyoutData, ILogger<BuyoutBusiness> logger)
     {
         _buyoutData = buyoutData;
         _logger = logger;
@@ -28,7 +28,7 @@ public class BuyoutBusiness
             var buyouts = await _buyoutData.GetAllAsync();
             return MapToDTOList(buyouts);
         }
-        catch (Exception ex )
+        catch (Exception ex)
         {
             _logger.LogError(ex, "Error al obtener todas las compras");
             throw new ExternalServiceException("Base de datos", "Error al recuperar la lista de compras", ex);
@@ -67,8 +67,7 @@ public class BuyoutBusiness
     {
         try
         {
-            
-          ValidateBuyout(buyoutDto);
+            ValidateBuyout(buyoutDto);
 
             var buyout = MapToEntity(buyoutDto);
 
@@ -81,6 +80,8 @@ public class BuyoutBusiness
             throw new ExternalServiceException("Base de datos", "Error al crear la compra", ex);
         }
     }
+
+    // ... (todo lo anterior se mantiene igual)
 
     // Método para actualizar una compra existente
     public async Task<bool> UpdateBuyoutAsync(BuyoutDto buyoutDto)
@@ -171,7 +172,7 @@ public class BuyoutBusiness
                 throw new EntityNotFoundException("Compra", id);
             }
 
-           // buyout.Status = false;
+            // buyout.Status = false;
 
             var result = await _buyoutData.UpdateAsync(buyout);
 
@@ -241,9 +242,7 @@ public class BuyoutBusiness
         {
             Id = buyout.Id,
             Quantity = buyout.Quantity,
-            Date = buyout.Date,
-            IdUser = buyout.IdUser,
-            IdProduct = buyout.IdProduct
+            Date = buyout.Date
         };
     }
 
@@ -254,9 +253,7 @@ public class BuyoutBusiness
         {
             Id = buyoutDto.Id,
             Quantity = buyoutDto.Quantity,
-            Date = buyoutDto.Date,
-            IdUser = buyoutDto.IdUser,
-            IdProduct = buyoutDto.IdProduct 
+            Date = buyoutDto.Date
         };
     }
 

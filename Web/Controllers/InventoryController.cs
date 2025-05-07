@@ -123,31 +123,32 @@ namespace Web.Controllers
             }
         }
         /// <summary>
-        /// Actualiza un inventario existente en el sistema.
+        /// Actualiza un inventario existente en el sistema
         /// </summary>
         /// <param name="id">ID del inventario a actualizar</param>
         /// <param name="inventoryDto">Datos actualizados del inventario</param>
         /// <returns>Resultado de la operación</returns>
         /// <response code="200">Inventario actualizado correctamente</response>
-        /// <response code="400">Datos no válidos</response>
+        /// <response code="400">Datos del inventario no válidos</response>
         /// <response code="404">Inventario no encontrado</response>
         /// <response code="500">Error interno del servidor</response>
-        [HttpPut("update/{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> UpdateInventoryAsync(int id, [FromBody] InventoryDto inventoryDto)
+        public async Task<IActionResult> UpdateInventory(int id, [FromBody] InventoryDto inventoryDto)
         {
             if (id != inventoryDto.Id)
             {
-                return BadRequest(new { message = "El ID proporcionado no coincide con el ID del objeto." });
+                return BadRequest(new { message = "El ID del inventario no coincide con el ID proporcionado en el cuerpo de la solicitud." });
             }
 
             try
             {
-                var updatedInventory = await _inventoryBusiness.UpdateInventoryAsync(id, inventoryDto);
-                return Ok(new { message = "Inventario actualizado correctamente", data = updatedInventory });
+                await _inventoryBusiness.UpdateAsync(inventoryDto);
+                return Ok(new { message = "Inventario actualizado correctamente", success = true });
+
             }
             catch (ValidationException ex)
             {

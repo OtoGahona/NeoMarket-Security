@@ -1,4 +1,4 @@
-﻿using Business;
+using Business;
 using Data;
 using Entity.Context;
 using Microsoft.EntityFrameworkCore;
@@ -79,6 +79,10 @@ builder.Services.AddScoped<SaleDetailBusiness>();
 builder.Services.AddScoped<UserData>();
 builder.Services.AddScoped<UserBusiness>();
 
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 // Agregar CORS 
 //mecanismo de seguridad que permite o restringe las solicitudes de recursos que se originan desde un dominio diferente al del servidor.
 var OrigenesPermitidos = builder.Configuration.GetValue<string>("OrigenesPermitidos")!.Split(",");
@@ -90,13 +94,15 @@ builder.Services.AddCors(opciones =>
     });
 });
 
+
+
+
 // Agregar DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection"))
 );
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -111,6 +117,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+app.UseCors();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

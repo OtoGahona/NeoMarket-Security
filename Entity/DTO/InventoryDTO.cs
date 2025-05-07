@@ -11,8 +11,8 @@ namespace Entity.DTO
         public int Id { get; set; }
         public string NameInventory { get; set; } = string.Empty;
         public bool Status { get; set; }
-        public string DescriptionInvetory { get; set; } = string.Empty;
+        public string DescriptionInventory { get; set; } = string.Empty;
         public string ZoneProduct {  get; set; } = string.Empty;
-        public string Observations { get; set; }
+        public string Observation { get; set; }
     }
 }

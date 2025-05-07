@@ -12,9 +12,9 @@ namespace Business;
 public class SaleBusiness
 {
     private readonly SaleData _seleData;
-    private readonly ILogger <SaleBusiness> _logger;
+    private readonly ILogger<SaleBusiness> _logger;
 
-    public SaleBusiness(SaleData seleData, ILogger <SaleBusiness> logger)
+    public SaleBusiness(SaleData seleData, ILogger<SaleBusiness> logger)
     {
         _seleData = seleData;
         _logger = logger;
@@ -259,7 +259,6 @@ public class SaleBusiness
             Id = seleccion.Id,
             Date = seleccion.Date,
             Totaly = seleccion.Totaly,
-            IdUser =seleccion.IdUser
 
         };
     }
@@ -271,8 +270,7 @@ public class SaleBusiness
         {
             Id = seleDto.Id,
             Date = seleDto.Date,
-            Totaly = seleDto.Totaly,
-            IdUser = seleDto.IdUser
+            Totaly = seleDto.Totaly
         };
     }
 

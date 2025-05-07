@@ -4,7 +4,6 @@ using Entity.Model;
 using Microsoft.Extensions.Logging;
 using Utilities.Exceptions;
 
-
 namespace Business;
 
 /// <summary>
@@ -13,7 +12,7 @@ namespace Business;
 public class PersonBusiness
 {
     private readonly PersonData _personData;
-    private readonly ILogger <PersonBusiness> _logger;
+    private readonly ILogger<PersonBusiness> _logger;
 
     public PersonBusiness(PersonData personData, ILogger<PersonBusiness> logger)
     {

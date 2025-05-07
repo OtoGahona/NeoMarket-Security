@@ -33,7 +33,7 @@ namespace Data
         /// <returns>Lista de Persons.</returns>
         public async Task<IEnumerable<Person>> GetAllAsync()
         {
-            return await _context.Set<Person>().ToListAsync();  
+            return await _context.Set<Person>().ToListAsync();
         }
 
         /// <summary>

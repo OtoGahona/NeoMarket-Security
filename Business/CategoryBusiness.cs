@@ -12,9 +12,9 @@ namespace Business;
 public class CategoryBusiness
 {
     private readonly CategoryData _categoryData;
-    private readonly ILogger <CategoryBusiness> _logger;
+    private readonly ILogger<CategoryBusiness> _logger;
 
-    public CategoryBusiness(CategoryData categoryData, ILogger <CategoryBusiness> logger)
+    public CategoryBusiness(CategoryData categoryData, ILogger<CategoryBusiness> logger)
     {
         _categoryData = categoryData;
         _logger = logger;

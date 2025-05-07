@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fac89b1779cb470b879e149012922a8d" Name="Diagram1" ZoomLevel="49" >
+      <Diagram DiagramId="fac89b1779cb470b879e149012922a8d" Name="Diagram1" ZoomLevel="90" >
         <EntityTypeShape EntityType="Model1.Form" Width="1.5" PointX="12.875" PointY="9.5" />
         <EntityTypeShape EntityType="Model1.Module" Width="1.5" PointX="15.75" PointY="7.125" />
         <EntityTypeShape EntityType="Model1.RolForm" Width="1.5" PointX="11.125" PointY="1.5" />
         <EntityTypeShape EntityType="Model1.Rol" Width="1.5" PointX="9.125" PointY="0.5" />
-        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="5.75" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="5.625" PointY="0.625" />
         <EntityTypeShape EntityType="Model1.Person" Width="1.5" PointX="5.25" PointY="8" />
         <EntityTypeShape EntityType="Model1.Sede" Width="1.5" PointX="14.5" PointY="1.375" />
         <EntityTypeShape EntityType="Model1.Company" Width="1.5" PointX="17.25" PointY="1.25" />
-        <EntityTypeShape EntityType="Model1.Product" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="Model1.Product" Width="1.5" PointX="2.625" PointY="7.375" />
         <EntityTypeShape EntityType="Model1.ImageItem" Width="1.5" PointX="4.75" PointY="14.375" />
-        <EntityTypeShape EntityType="Model1.Inventory" Width="1.5" PointX="0.5" PointY="4" />
+        <EntityTypeShape EntityType="Model1.Inventory" Width="1.5" PointX="0.5" PointY="4.5" />
         <EntityTypeShape EntityType="Model1.Category" Width="1.5" PointX="0.75" PointY="12.25" />
         <EntityTypeShape EntityType="Model1.MovimientoInventory" Width="2.25" PointX="0.5" PointY="0.625" />
         <EntityTypeShape EntityType="Model1.Buyout" Width="1.5" PointX="3.5" PointY="1" />
@@ -32,13 +32,15 @@
         <AssociationConnector Association="Model1.ItemCategory" />
         <AssociationConnector Association="Model1.ProductBuyout" />
         <AssociationConnector Association="Model1.ProductMovimientoInventory" />
-        <AssociationConnector Association="Model1.ProductInventory" />
         <AssociationConnector Association="Model1.ProductSaleDetail" />
         <AssociationConnector Association="Model1.InventoryMovimientoItemInventory" />
         <AssociationConnector Association="Model1.UserBuyout" />
         <AssociationConnector Association="Model1.UserSale" />
         <AssociationConnector Association="Model1.SaleSaleDetail" />
         <AssociationConnector Association="Model1.UserNotification" />
+        <AssociationConnector Association="Model1.InventoryProduct" />
+        <AssociationConnector Association="Model1.UserMovimientoInventory" />
+        <AssociationConnector Association="Model1.CompanyUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

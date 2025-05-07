@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 		public int Id { get; set; }
 		public string NameCategory { get; set; } = string.Empty;
         public string Description { get; set; }
+        public bool Status { get; set; }
         public Product Product { get; set; }
 
     }

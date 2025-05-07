@@ -14,9 +14,9 @@ namespace Business;
 public class FormBusiness
 {
     private readonly FormData _formData;
-    private readonly ILogger <FormBusiness> _logger;
+    private readonly ILogger<FormBusiness> _logger;
 
-    public FormBusiness(FormData formData, ILogger <FormBusiness> logger)
+    public FormBusiness(FormData formData, ILogger<FormBusiness> logger)
     {
         _formData = formData;
         _logger = logger;
@@ -106,7 +106,7 @@ public class FormBusiness
             if (!string.IsNullOrWhiteSpace(updatedFields.Description))
                 existingForm.Description = updatedFields.Description;
 
-                existingForm.Status = updatedFields.Status;
+            existingForm.Status = updatedFields.Status;
 
             await _formData.UpdateAsync(existingForm);
 
@@ -119,36 +119,32 @@ public class FormBusiness
         }
     }
 
-    // Método para actualizar una compra existente
-
-    public async Task<bool> UpdateFormAsync(FormDto formDto)
+    // Método para actualizar un formulario completo
+    public async Task<bool> UpdateFormAsync(int id, FormDto formDto)
     {
         try
         {
-            // Validamos los datos recibidos del formulario
             ValidateForm(formDto);
 
-            // Mapeamos el DTO a la entidad correspondiente
-            var formEntity = MapToEntity(formDto);
+            var form = MapToEntity(formDto);
 
-            // Realizamos la actualización del formulario en la base de datos
-            var result = await _formData.UpdateAsync(formEntity);
+            var result = await _formData.UpdateAsync(form);
 
-            // Verificamos si la actualización fue exitosa
             if (!result)
             {
-                _logger.LogWarning("No se pudo actualizar el formulario con ID {FormId}", formDto.Id);
-                throw new EntityNotFoundException("Formulario", formDto.Id);
+                _logger.LogWarning("No se pudo actualizar el Form con ID {FormId}", formDto.Id);
+                throw new EntityNotFoundException("Form", formDto.Id);
             }
 
             return result;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al actualizar el formulario con ID {FormId}", formDto.Id);
-            throw new ExternalServiceException("Base de datos", $"Error al actualizar el formulario con ID {formDto.Id}", ex);
+            _logger.LogError(ex, "Error al actualizar el Form con ID {FormId}", formDto.Id);
+            throw new ExternalServiceException("Base de datos", $"Error al actualizar el Form con ID {formDto.Id}", ex);
         }
     }
+
 
     // Método para eliminar lógicamente un formulario (SoftDelete)
     public async Task<bool> SoftDeleteAsync(int id)
@@ -177,6 +173,33 @@ public class FormBusiness
         }
     }
 
+    // Método para eliminar un Formulario por su ID
+    public async Task<bool> DeleteFormAsync(int id)
+    {
+        if (id <= 0)
+        {
+            _logger.LogWarning("Se intentó eliminar un Form con un ID inválido: {FormId}", id);
+            throw new Utilities.Exceptions.ValidationException("id", "El ID del ImageItem debe ser mayor a 0");
+        }
+
+        try
+        {
+            var result = await _formData.DeleteAsync(id);
+
+            if (!result)
+            {
+                _logger.LogInformation("No se encontró el Form con ID {FormId} para eliminar", id);
+                throw new EntityNotFoundException("Form", id);
+            }
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al eliminar el Form con ID {FormId}", id);
+            throw new ExternalServiceException("Base de datos", $"Error al eliminar el Form con ID {id}", ex);
+        }
+    }
 
     // Método para validar el DTO
     private void ValidateForm(FormDto formDto)
@@ -201,8 +224,7 @@ public class FormBusiness
             Id = form.Id,
             Description = form.Description,
             Status = form.Status,
-            NameForm = form.NameForm,
-            IdModule = form.IdModule
+            NameForm = form.NameForm
         };
     }
 
@@ -214,8 +236,7 @@ public class FormBusiness
             Id = formDto.Id,
             NameForm = formDto.NameForm,
             Description = formDto.Description,
-            Status = formDto.Status,
-            IdModule = formDto.IdModule
+            Status = formDto.Status
         };
     }
 
@@ -228,40 +249,5 @@ public class FormBusiness
             formDto.Add(MapToDTO(form));
         }
         return formDto;
-    }
-
-    public async Task UpdateAsync(FormDto formDto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task DeleteFormAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task SoftDeleteFormAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task UpdatePartialFormAsync(int id, FormDto updatedFields)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task UpdatePartialAsync(int id, Dictionary<string, object> fields)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task UpdateAsync(int id, FormDto formDto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task DeleteformAsync(int id)
-    {
-        throw new NotImplementedException();
     }
 }

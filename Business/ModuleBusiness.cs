@@ -12,7 +12,7 @@ namespace Business;
 public class ModuleBusiness
 {
     private readonly ModuleData _moduleData;
-    private readonly ILogger <ModuleBusiness> _logger;
+    private readonly ILogger<ModuleBusiness> _logger;
 
     public ModuleBusiness(ModuleData moduleData, ILogger<ModuleBusiness> logger)
     {
@@ -167,7 +167,7 @@ public class ModuleBusiness
                 throw new EntityNotFoundException("Module", id);
             }
 
-            module.status = true;
+            module.status = false;
 
             var result = await _moduleData.UpdateAsync(module);
 
@@ -262,4 +262,3 @@ public class ModuleBusiness
         return modulesDTO;
     }
 }
-

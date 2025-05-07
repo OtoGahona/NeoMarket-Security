@@ -70,10 +70,6 @@
             <End Role="Product" EntitySet="Items" />
             <End Role="MovimientoInventory" EntitySet="MovimientoInventorySet" />
           </AssociationSet>
-          <AssociationSet Name="ProductInventory" Association="Model1.ProductInventory">
-            <End Role="Product" EntitySet="Items" />
-            <End Role="Inventory" EntitySet="Inventorys" />
-          </AssociationSet>
           <AssociationSet Name="ProductSaleDetail" Association="Model1.ProductSaleDetail">
             <End Role="Product" EntitySet="Items" />
             <End Role="SaleDetail" EntitySet="SaleDetailSet" />
@@ -97,6 +93,18 @@
           <AssociationSet Name="UserNotification" Association="Model1.UserNotification">
             <End Role="User" EntitySet="UserSet" />
             <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="InventoryProduct" Association="Model1.InventoryProduct">
+            <End Role="Inventory" EntitySet="Inventorys" />
+            <End Role="Product" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="UserMovimientoInventory" Association="Model1.UserMovimientoInventory">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="MovimientoInventory" EntitySet="MovimientoInventorySet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyUser" Association="Model1.CompanyUser">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="User" EntitySet="UserSet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Form">
@@ -153,12 +161,14 @@
           <Property Name="DeleteAt" Type="String" Nullable="false" />
           <Property Name="Status" Type="String" Nullable="false" />
           <Property Name="UpdateAt" Type="String" Nullable="false" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Rol" Relationship="Model1.UserRol" FromRole="User" ToRole="Rol" />
           <NavigationProperty Name="Person" Relationship="Model1.UserPerson" FromRole="User" ToRole="Person" />
           <NavigationProperty Name="Buyout" Relationship="Model1.UserBuyout" FromRole="User" ToRole="Buyout" />
           <NavigationProperty Name="Sale" Relationship="Model1.UserSale" FromRole="User" ToRole="Sale" />
           <NavigationProperty Name="Notification" Relationship="Model1.UserNotification" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="MovimientoInventory" Relationship="Model1.UserMovimientoInventory" FromRole="User" ToRole="MovimientoInventory" />
+          <NavigationProperty Name="Company" Relationship="Model1.CompanyUser" FromRole="User" ToRole="Company" />
+          <Property Name="IdCompany" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -207,6 +217,7 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="Logo" Type="String" Nullable="false" />
           <NavigationProperty Name="Sede" Relationship="Model1.CompanySede" FromRole="Company" ToRole="Sede" />
+          <NavigationProperty Name="User" Relationship="Model1.CompanyUser" FromRole="Company" ToRole="User" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -220,13 +231,13 @@
           <Property Name="DeleteAt" Type="String" Nullable="false" />
           <Property Name="UpdateAt" Type="String" Nullable="false" />
           <Property Name="Status" Type="String" Nullable="false" />
-          <Property Name="IdInventory" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ImageItem" Relationship="Model1.ItemImageItem" FromRole="Product" ToRole="ImageItem" />
           <NavigationProperty Name="Category" Relationship="Model1.ItemCategory" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="Buyout" Relationship="Model1.ProductBuyout" FromRole="Product" ToRole="Buyout" />
           <NavigationProperty Name="MovimientoInventory" Relationship="Model1.ProductMovimientoInventory" FromRole="Product" ToRole="MovimientoInventory" />
-          <NavigationProperty Name="Inventory" Relationship="Model1.ProductInventory" FromRole="Product" ToRole="Inventory" />
           <NavigationProperty Name="SaleDetail" Relationship="Model1.ProductSaleDetail" FromRole="Product" ToRole="SaleDetail" />
+          <NavigationProperty Name="Inventory" Relationship="Model1.InventoryProduct" FromRole="Product" ToRole="Inventory" />
+          <Property Name="IdInventory" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ImageItem">
           <Key>
@@ -250,9 +261,8 @@
           <Property Name="UpdateAt" Type="String" Nullable="false" />
           <Property Name="StockActual" Type="String" Nullable="false" />
           <Property Name="ZoneProduct" Type="String" Nullable="false" />
-          <Property Name="IdProduct" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Model1.ProductInventory" FromRole="Inventory" ToRole="Product" />
           <NavigationProperty Name="MovimientoItemInventory" Relationship="Model1.InventoryMovimientoItemInventory" FromRole="Inventory" ToRole="MovimientoInventory" />
+          <NavigationProperty Name="Product" Relationship="Model1.InventoryProduct" FromRole="Inventory" ToRole="Product" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -274,10 +284,11 @@
           <Property Name="Date" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="Int32" Nullable="false" />
           <Property Name="IdInventory" Type="String" Nullable="false" />
-          <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="IdProduct" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Model1.ProductMovimientoInventory" FromRole="MovimientoInventory" ToRole="Product" />
           <NavigationProperty Name="Inventory" Relationship="Model1.InventoryMovimientoItemInventory" FromRole="MovimientoInventory" ToRole="Inventory" />
+          <NavigationProperty Name="User" Relationship="Model1.UserMovimientoInventory" FromRole="MovimientoInventory" ToRole="User" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Buyout">
           <Key>
@@ -423,18 +434,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ProductInventory">
-          <End Type="Model1.Product" Role="Product" Multiplicity="1" />
-          <End Type="Model1.Inventory" Role="Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="IdProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ProductSaleDetail">
           <End Type="Model1.Product" Role="Product" Multiplicity="1" />
           <End Type="Model1.SaleDetail" Role="SaleDetail" Multiplicity="*" />
@@ -504,6 +503,42 @@
             </Principal>
             <Dependent Role="Notification">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InventoryProduct">
+          <End Type="Model1.Inventory" Role="Inventory" Multiplicity="1" />
+          <End Type="Model1.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdInventory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserMovimientoInventory">
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+          <End Type="Model1.MovimientoInventory" Role="MovimientoInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MovimientoInventory">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyUser">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdCompany" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

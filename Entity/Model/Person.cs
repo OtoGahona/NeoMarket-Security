@@ -16,7 +16,7 @@ using System.Threading.Tasks;
         public string PhoneNumber { get; set; } 
         public TypeIdentification? TypeIdentification { get; set; }
         public bool Status { get; set; }
-        public int NumberIndification { get; set; }
+        public int NumberIdentification { get; set; }
         public User User { get; set; }
     }
 }

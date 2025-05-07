@@ -14,7 +14,10 @@ using System.Threading.Tasks;
 		public string NameRol { get; set; } = string.Empty;
 		public string Description { get; set; }
 		public bool Status { get; set; }
-		public int IdUser { get; set; }
+		public DateTime? CreateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
+        public DateTime? DeleteAt { get; set; }
+
         public User User { get; set; }
         public ICollection<RolForm> RolForms { get; set; }
     }

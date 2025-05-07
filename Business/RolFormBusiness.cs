@@ -13,9 +13,9 @@ namespace Business;
 public class RolFormBusiness
 {
     private readonly RolFormData _rolFormData;
-    private readonly ILogger <RolFormBusiness> _logger;
+    private readonly ILogger<RolFormBusiness> _logger;
 
-    public RolFormBusiness(RolFormData rolFormData, ILogger <RolFormBusiness> logger)
+    public RolFormBusiness(RolFormData rolFormData, ILogger<RolFormBusiness> logger)
     {
         _rolFormData = rolFormData;
         _logger = logger;
@@ -252,9 +252,7 @@ public class RolFormBusiness
         return new RolFormDto
         {
             Id = rolForm.Id,
-            Permision = rolForm.Permision,
-            IdForm = rolForm.IdForm,
-            IdRol = rolForm.IdRol
+            Permision = rolForm.Permision
         };
     }
 
@@ -264,9 +262,7 @@ public class RolFormBusiness
         return new RolForm
         {
             Id = rolFormDTO.Id,
-            Permision = rolFormDTO.Permision,
-            IdRol = rolFormDTO.IdRol,
-            IdForm =rolFormDTO.IdForm
+            Permision = rolFormDTO.Permision
         };
     }
 

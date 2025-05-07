@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using BCrypt.Net;
+using Data;
 using Entity.DTO;
 using Entity.Model;
 using Microsoft.Extensions.Logging;
@@ -12,9 +13,9 @@ namespace Business;
 public class UserBusiness
 {
     private readonly UserData _userData;
-    private readonly ILogger <UserBusiness> _logger;
+    private readonly ILogger<UserBusiness> _logger;
 
-    public UserBusiness(UserData userData, ILogger <UserBusiness> logger)
+    public UserBusiness(UserData userData, ILogger<UserBusiness> logger)
     {
         _userData = userData;
         _logger = logger;
@@ -26,7 +27,7 @@ public class UserBusiness
         try
         {
             var users = await _userData.GetAllAsync();
-            return MapToDTOList(users);
+            return users;
         }
         catch (Exception ex)
         {
@@ -70,9 +71,9 @@ public class UserBusiness
             ValidateUser(userDto);
 
             var user = MapToEntity(userDto);
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
 
-            var userCreado = await _userData.CreateAsync(user);
-
+            var userCreado = await _userData.CreateAsync(user); 
             return MapToDTO(userCreado);
         }
         catch (Exception ex)
@@ -254,6 +255,19 @@ public class UserBusiness
         }
     }
 
+    // Fix for CS8602: Add a null check for 'user' before accessing its properties
+    public async Task<UserDto> ValidateCredentialsAsync(string userName, string password)
+    {
+        var user = await _userData.GetByUserNameAsync(userName);
+
+        // Reemplaza la línea problemática con la siguiente:
+        //if (user == null || !user.Status || !BCrypt.Net.BCrypt.Verify(password, user.Password))
+
+          //  return null;
+
+        return MapToDTO(user);
+    }
+
     // Método para mapear de User a UserDto
     private UserDto MapToDTO(User user)
     {
@@ -262,8 +276,13 @@ public class UserBusiness
             Id = user.Id,
             UserName = user.UserName,
             Password = user.Password,
+            CreateAt = user.CreateAt,
+            DeleteAt = user.DeleteAt,
+            UpdateAt = user.UpdateAt,
             Status = user.Status,
             IdPerson = user.IdPerson,
+            IdRol = user.IdRol,
+            IdCompany = user.IdCompany
         };
     }
 
@@ -275,19 +294,13 @@ public class UserBusiness
             Id = userDto.Id,
             UserName = userDto.UserName,
             Password = userDto.Password,
+            CreateAt = userDto.CreateAt,
+            DeleteAt = userDto.DeleteAt,
+            UpdateAt = userDto.UpdateAt,
             Status = userDto.Status,
             IdPerson = userDto.IdPerson,
+            IdCompany = userDto.IdCompany,
+            IdRol = userDto.IdRol
         };
-    }
-
-    // Método para mapear una lista de User a una lista de UserDto
-    private IEnumerable<UserDto> MapToDTOList(IEnumerable<User> users)
-    {
-        var usersDTO = new List<UserDto>();
-        foreach (var user in users)
-        {
-            usersDTO.Add(MapToDTO(user));
-        }
-        return usersDTO;
     }
 }

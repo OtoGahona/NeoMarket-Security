@@ -14,5 +14,9 @@ namespace Entity.Enum
 
         [Display(Name = "Salida de productos")]
         Salida = 2,
+
+        [Display(Name = "Actualización de productos")]
+        Actualizacion = 3,
+
     }
 }

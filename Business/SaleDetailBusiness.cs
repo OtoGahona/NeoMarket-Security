@@ -12,9 +12,9 @@ namespace Business;
 public class SaleDetailBusiness
 {
     private readonly SeleDetailData _seleDetailData;
-    private readonly ILogger <SaleDetailBusiness> _logger;
+    private readonly ILogger<SaleDetailBusiness> _logger;
 
-    public SaleDetailBusiness(SeleDetailData seleDetailData, ILogger <SaleDetailBusiness> logger)
+    public SaleDetailBusiness(SeleDetailData seleDetailData, ILogger<SaleDetailBusiness> logger)
     {
         _seleDetailData = seleDetailData;
         _logger = logger;
@@ -257,9 +257,7 @@ public class SaleDetailBusiness
         {
             Id = seleDetail.Id,
             Quantity = seleDetail.Quantity,
-            Price = seleDetail.Price,
-            IdProduct = seleDetail.IdProduct,
-            IdSele = seleDetail.IdSele
+            Price = seleDetail.Price
         };
     }
 
@@ -270,9 +268,7 @@ public class SaleDetailBusiness
         {
             Id = seleDetailDto.Id,
             Quantity = seleDetailDto.Quantity,
-            Price = seleDetailDto.Price,
-            IdProduct = seleDetailDto.IdProduct,
-            IdSele = seleDetailDto.IdSele
+            Price = seleDetailDto.Price
         };
     }
 

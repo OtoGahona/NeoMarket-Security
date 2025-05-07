@@ -12,7 +12,7 @@ namespace Business;
 public class NotificationBusiness
 {
     private readonly NotificationData _notificationData;
-    private readonly ILogger <NotificationBusiness> _logger;
+    private readonly ILogger<NotificationBusiness> _logger;
 
     public NotificationBusiness(NotificationData notificationData, ILogger<NotificationBusiness> logger)
     {
@@ -241,8 +241,7 @@ public class NotificationBusiness
             Message = notification.Message,
             TypeAction = notification.TypeAction,
             Read = notification.Read,
-            Date = notification.Date,
-            IdUser = notification.IdUser
+            Date = notification.Date
         };
     }
 
@@ -255,8 +254,7 @@ public class NotificationBusiness
             Message = notificationDto.Message,
             TypeAction = notificationDto.TypeAction,
             Read = notificationDto.Read,
-            Date = notificationDto.Date,
-            IdUser = notificationDto.IdUser
+            Date = notificationDto.Date
         };
     }
 

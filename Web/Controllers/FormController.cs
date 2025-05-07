@@ -137,9 +137,8 @@ namespace Web.Controllers
 
             try
             {
-object value = await _formBusiness.UpdateFormAsync(formDto);
-return Ok(new { message = "Rol actualizado correctamente", success = true });
-
+                await _formBusiness.UpdateFormAsync(id, formDto);
+                return Ok(new { message = "Rol actualizado correctamente", success = true });
             }
             catch (ValidationException ex)
             {
@@ -211,7 +210,7 @@ return Ok(new { message = "Rol actualizado correctamente", success = true });
             }
             catch (EntityNotFoundException ex)
             {
-                _logger.LogInformation(ex,"no encontrado con ID: {FormId}", id);
+                _logger.LogInformation(ex, "no encontrado con ID: {FormId}", id);
                 return NotFound(new { message = ex.Message });
             }
             catch (ExternalServiceException ex)

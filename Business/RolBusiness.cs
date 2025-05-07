@@ -4,7 +4,6 @@ using Data;
 using Entity.DTO;
 using Entity.Model;
 using Microsoft.Extensions.Logging;
-
 using Utilities.Exceptions;
 
 namespace Business;
@@ -15,9 +14,9 @@ namespace Business;
 public class RolBusiness
 {
     private readonly RolData _rolData;
-    private readonly ILogger <RolBusiness> _logger;
+    private readonly ILogger<RolBusiness> _logger;
 
-    public RolBusiness(RolData rolData, ILogger <RolBusiness> logger)
+    public RolBusiness(RolData rolData, ILogger<RolBusiness> logger)
     {
         _rolData = rolData;
         _logger = logger;
@@ -254,7 +253,9 @@ public class RolBusiness
             NameRol = rol.NameRol,
             Description = rol.Description,
             Status = rol.Status,
-            IdUser = rol.IdUser
+            CreateAt = rol.CreateAt,
+            UpdateAt = rol.UpdateAt,
+            DeleteAt = rol.DeleteAt
         };
     }
 
@@ -267,7 +268,9 @@ public class RolBusiness
             NameRol = rolDTO.NameRol,
             Description = rolDTO.Description,
             Status = rolDTO.Status,
-            IdUser = rolDTO.IdUser
+            CreateAt = rolDTO.CreateAt,
+            UpdateAt = rolDTO.UpdateAt,
+            DeleteAt = rolDTO.DeleteAt
         };
     }
 

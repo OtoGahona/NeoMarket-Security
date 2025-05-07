@@ -103,8 +103,8 @@ public class InventoryBusiness
                 existingInventory.NameInventory = updatedFields.NameInventory;
 
             existingInventory.Status = updatedFields.Status;
-            existingInventory.DescriptionInvetory = updatedFields.DescriptionInvetory;
-            existingInventory.Observations = updatedFields.Observations;
+            existingInventory.DescriptionInventory = updatedFields.DescriptionInventory;
+            existingInventory.Observation = updatedFields.Observation;
             existingInventory.ZoneProduct = updatedFields.ZoneProduct;
 
             // Ejecutar la actualización
@@ -215,8 +215,8 @@ public class InventoryBusiness
             Id = inventory.Id,
             NameInventory = inventory.NameInventory,
             Status = inventory.Status,
-            DescriptionInvetory = inventory.DescriptionInvetory,
-            Observations = inventory.Observations,
+            DescriptionInventory = inventory.DescriptionInventory,
+            Observation = inventory.Observation,
             ZoneProduct = inventory.ZoneProduct
         };
     }
@@ -229,8 +229,8 @@ public class InventoryBusiness
             Id = inventoryDto.Id,
             NameInventory = inventoryDto.NameInventory,
             Status = inventoryDto.Status,
-            DescriptionInvetory = inventoryDto.DescriptionInvetory,
-            Observations = inventoryDto.Observations,
+            DescriptionInventory = inventoryDto.DescriptionInventory,
+            Observation = inventoryDto.Observation,
             ZoneProduct = inventoryDto.ZoneProduct
         };
     }
